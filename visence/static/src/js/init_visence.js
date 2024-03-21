@@ -4,20 +4,15 @@ odoo.define('visence', ['web.session', 'web.rpc'], function (require) {
   var rpc = require('web.rpc');
   function getNames(name) {
     var names = name.split(' ');
-    if (names.length < 2) {
-      return { firstName: ' ', lastName: name };
-    } else if (names.length === 2) {
-      return { firstName: names[0], lastName: names[1] };
-    } else {
-      return { firstName: names[0], lastName: names.slice(1).join(' ') };
-    }
+    if (names.length < 2) return { firstName: ' ', lastName: name };
+    else if (names.length === 2) return  { firstName: names[0], lastName: names[1] };
+    else return { firstName: names[0], lastName: names.slice(1).join(' ') };
   }
-  var user = session.user_id;
-  if (user.length > 0 && user[0]) {
+  if (session.user_id.length > 0 && session.user_id[0]) {
     rpc.query({
       model: 'res.users',
       method: 'read',
-      args: [[user[0]], ['name', 'email', 'company_id', 'phone', 'create_date', 'visence_apikey']],
+      args: [[session.user_id[0]], ['name', 'email', 'company_id', 'phone', 'create_date', 'visence_apikey']],
     }).then(function (result) {
       if (result.length === 1) {
         var { id: idExt, name, email, company_id: company, phone, create_date, visence_apikey } = result[0];
@@ -34,9 +29,7 @@ odoo.define('visence', ['web.session', 'web.rpc'], function (require) {
               email,
               phone: phone || '',
               registerDate: new Date(create_date),
-              custom: {
-                environment: window.location.origin, 
-              }
+              custom: { environment: window.location.origin },
             },
             client: {
               idExt: company_id.toString(),

@@ -2,7 +2,6 @@ from odoo import fields, models
 
 class ResUsers(models.Model):
   _inherit = 'res.users'
-
   visence_apikey = fields.Char("Clé d'API Visence", compute='_compute_visence_apikey')
 
   def _compute_visence_apikey(self):
