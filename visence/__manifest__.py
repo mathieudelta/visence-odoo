@@ -1,12 +1,7 @@
 {
     'name': "Visence",
-
-    'summary': """
-        Intégration de Visence""",
-
-    'description': """
-        Intégration de Visence
-      """,
+    'summary': """Visence integration""",
+    'description': """Integrate Visence in your Odoo application.""",
     'author': "Visence",
     'website': "https://visence.co/",
     'version': '1.0.0',
