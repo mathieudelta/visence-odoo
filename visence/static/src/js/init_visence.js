@@ -32,7 +32,7 @@ odoo.define('visence', ['web.session', 'web.rpc'], function (require) {
               custom: { environment: window.location.origin },
             },
             client: {
-              idExt: company_id.toString(),
+              idExt: company_id.toString() + '-' + window.location.origin,
               name: company_name,
             },
           });
